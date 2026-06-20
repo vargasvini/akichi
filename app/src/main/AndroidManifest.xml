@@ -53,6 +53,11 @@
             android:windowSoftInputMode="adjustResize"/>
 
         <activity
+            android:name=".regist.PsnLoginActivity"
+            android:theme="@style/MageTheme"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <activity
             android:name=".regist.RegistExecuteActivity"
             android:theme="@style/MageTheme"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />

@@ -28,6 +28,7 @@ class RegistActivity: AppCompatActivity(), RevealActivity
 		private const val PIN_LENGTH = 8
 
 		private const val REQUEST_REGIST = 1
+		private const val REQUEST_PSN_LOGIN = 2
 	}
 
 	private lateinit var viewModel: RegistViewModel
@@ -50,6 +51,11 @@ class RegistActivity: AppCompatActivity(), RevealActivity
 		binding.broadcastCheckBox.isChecked = intent.getBooleanExtra(EXTRA_BROADCAST, true)
 
 		binding.registButton.setOnClickListener { doRegist() }
+
+		// One-tap: sign in on Sony's page, auto-fill the Account ID. Manual entry stays available.
+		binding.psnLoginButton.setOnClickListener {
+			startActivityForResult(Intent(this, PsnLoginActivity::class.java), REQUEST_PSN_LOGIN)
+		}
 
 		binding.ps4VersionRadioGroup.check(when(viewModel.ps4Version.value ?: RegistViewModel.ConsoleVersion.PS5) {
 			RegistViewModel.ConsoleVersion.PS5 -> R.id.ps5RadioButton
@@ -150,5 +156,7 @@ class RegistActivity: AppCompatActivity(), RevealActivity
 		super.onActivityResult(requestCode, resultCode, data)
 		if(requestCode == REQUEST_REGIST && resultCode == RESULT_OK)
 			finish()
+		if(requestCode == REQUEST_PSN_LOGIN && resultCode == RESULT_OK)
+			data?.getStringExtra(PsnLoginActivity.EXTRA_ACCOUNT_ID)?.let { binding.psnIdEditText.setText(it) }
 	}
 }

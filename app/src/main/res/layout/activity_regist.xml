@@ -128,7 +128,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
-                app:constraint_referenced_ids="psnAccountIdHelpTextView,psnAccountIdHelpURLTextView"/>
+                app:constraint_referenced_ids="psnAccountIdHelpTextView,psnAccountIdHelpURLTextView,psnLoginButton"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/psnLoginButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/action_psn_login"
+                app:icon="@drawable/ic_psn_id"
+                app:layout_constraintTop_toBottomOf="@id/psnAccountIdHelpURLTextView"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/psnIdTextInputLayout"
@@ -136,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_regist_psn_online_id"
                 app:startIconDrawable="@drawable/ic_psn_id"
-                app:layout_constraintTop_toBottomOf="@id/psnAccountIdHelpURLTextView"
+                app:layout_constraintTop_toBottomOf="@id/psnLoginButton"
                 android:layout_marginTop="16dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/psnIdEditText"

@@ -10,6 +10,8 @@
     <string name="action_reconnect">Reconnect</string>
     <string name="action_wakeup">Wakeup</string>
     <string name="action_disconnect">Disconnect</string>
+    <string name="action_psn_login">Sign in with PSN (fill Account ID)</string>
+    <string name="psn_login_failed">Could not get your Account ID. Try again or enter it manually.</string>
     <string name="action_connect_immediately">Connect</string>
     <string name="action_connect_cancel_connect">Cancel</string>
     <string name="action_quit_session">Quit</string>

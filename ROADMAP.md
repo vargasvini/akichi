@@ -34,3 +34,15 @@ Everything is built and tested on the **dev** channel first, then promoted to **
 - Rebase the JNI onto chiaki-ng's modern libchiaki (HDR/HEVC Main10, DualSense haptics,
   adaptive bitrate/congestion).
 - Paid relay/SaaS for out-of-home Remote Play (recurring revenue).
+
+## Distribution & in-app updates (both feasible)
+- **In-app updater ("new version → update here", no manual reinstall).** Feasible. The app
+  checks a version manifest (GitHub Releases API or a small hosted JSON) for a higher
+  versionCode; if newer, it downloads the APK and installs it via Android `PackageInstaller`
+  (needs the `REQUEST_INSTALL_PACKAGES` permission; the user taps one system confirm). Because
+  every build shares the committed signing key, it is an **in-place update — no uninstall, data
+  preserved**. The consistent-signing work already done is the prerequisite.
+- **Listing in the Downloader app (Fire TV).** Downloader has no real app store, but the
+  standard path is: host the APK at a stable URL (GitHub Releases) and register a short
+  **Downloader Code** (via aftv.news) that maps to it — users just type the code to install.
+  The same hosted APK feeds the in-app updater, so the two share one release pipeline.
