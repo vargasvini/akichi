@@ -21,6 +21,14 @@
         <item name="android:textColorSecondary">#fff</item>
     </style>
 
+    <!-- Dark dropdown/overflow menus (toolbar "Add" submenu, overflow) with accent focus. -->
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Dark">
+        <item name="android:colorBackground">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:colorControlHighlight">#4D7C5CFF</item>
+    </style>
+
     <style name="AppTheme.FloatingActionButtonSpeedDial">
         <item name="tint">@color/floating_action_button_speed_dial_tint</item>
         <item name="android:backgroundTint">@color/floating_action_button_speed_dial_background</item>

@@ -26,6 +26,7 @@
     <string name="display_host_id_unregistered">ID: %s</string>
     <string name="display_host_id_registered">ID: %s (registered)</string>
     <string name="display_host_app_title_id">App: %s\nTitle ID: %s</string>
+    <string name="action_add">Add Console</string>
     <string name="action_register">Register Console</string>
     <string name="action_add_manual">Add Console Manually</string>
     <string name="regist_pin_instructions_ps4_before">On the PS4, navigate to</string>
@@ -103,8 +104,8 @@
     <string name="preferences_rumble_enabled_summary">Use phone vibration motor for rumble</string>
     <string name="preferences_motion_enabled_title">Motion</string>
     <string name="preferences_motion_enabled_summary">Use device\'s motion sensors for controller motion</string>
-    <string name="preferences_button_show_enabled_title">Show/Hide Buttons</string>
-    <string name="preferences_button_show_enabled_summary">Enable or disable buttons overlay</string>
+    <string name="preferences_button_show_enabled_title">Enable on-screen buttons</string>
+    <string name="preferences_button_show_enabled_summary">Show touch controls over the stream — leave off when playing with a controller</string>
     <string name="preferences_button_touchpad_show_enabled_title">Only touchpad</string>
     <string name="preferences_button_touchpad_show_enabled_summary">Show only touchpad</string>
     <string name="preferences_button_haptic_enabled_title">Touch Haptics</string>
@@ -116,8 +117,8 @@
     <string name="action_edit">Edit</string>
     <string name="session_logs_empty_info">No Session Logs recorded.</string>
     <string name="registered_hosts_empty_info">No Consoles registered.</string>
-    <string name="display_hosts_empty_discovery_off_info">No consoles yet.\n\nTurn on Discovery (top-right) to automatically find your PlayStation.\n\nYour PS5 or PS4 must be connected to the same Wi-Fi network as this device.\n\nThe + button is only for adding a console manually by IP — you don\'t need it for normal use.</string>
-    <string name="display_hosts_empty_discovery_on_info">Searching for your PlayStation…\n\nMake sure your PS5 or PS4 is turned on (or in Rest Mode) and connected to the SAME Wi-Fi network as this device.\n\nNothing to click here — it appears automatically once found.\n\n(The + button is only for adding a console manually by IP.)</string>
+    <string name="display_hosts_empty_discovery_off_info">No consoles yet.\n\nTurn on Discovery (top bar) to automatically find your PlayStation.\n\nYour PS5 or PS4 must be connected to the same Wi-Fi network as this device.\n\nUse Add (top bar) to register a console or add one manually by IP.</string>
+    <string name="display_hosts_empty_discovery_on_info">Searching for your PlayStation…\n\nMake sure your PS5 or PS4 is turned on (or in Rest Mode) and connected to the SAME Wi-Fi network as this device.\n\nIt appears here automatically once found — nothing to click.</string>
 
     <!-- Don't localize these -->
     <string name="preferences_discovery_enabled_key">discovery_enabled</string>

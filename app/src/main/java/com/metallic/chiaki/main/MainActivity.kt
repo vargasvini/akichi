@@ -42,19 +42,6 @@ class MainActivity : AppCompatActivity()
 		title = ""
 		setSupportActionBar(binding.toolbar)
 
-		binding.floatingActionButton.setOnClickListener {
-			expandFloatingActionButton(!binding.floatingActionButton.isExpanded)
-		}
-		binding.floatingActionButtonDialBackground.setOnClickListener {
-			expandFloatingActionButton(false)
-		}
-
-		binding.addManualButton.setOnClickListener { addManualConsole() }
-		binding.addManualLabelButton.setOnClickListener { addManualConsole() }
-
-		binding.registerButton.setOnClickListener { showRegistration() }
-		binding.registerLabelButton.setOnClickListener { showRegistration() }
-
 		viewModel = ViewModelProvider(this, viewModelFactory { MainViewModel(getDatabase(this), Preferences(this)) })
 			.get(MainViewModel::class.java)
 
@@ -111,12 +98,6 @@ class MainActivity : AppCompatActivity()
 			binding.emptyInfoLayout.visibility = View.GONE
 	}
 
-	private fun expandFloatingActionButton(expand: Boolean)
-	{
-		binding.floatingActionButton.isExpanded = expand
-		binding.floatingActionButton.isActivated = binding.floatingActionButton.isExpanded
-	}
-
 	override fun onStart()
 	{
 		super.onStart()
@@ -127,16 +108,6 @@ class MainActivity : AppCompatActivity()
 	{
 		super.onStop()
 		viewModel.discoveryManager.pause()
-	}
-
-	override fun onBackPressed()
-	{
-		if(binding.floatingActionButton.isExpanded)
-		{
-			expandFloatingActionButton(false)
-			return
-		}
-		super.onBackPressed()
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean
@@ -163,6 +134,18 @@ class MainActivity : AppCompatActivity()
 			true
 		}
 
+		R.id.action_register ->
+		{
+			showRegistration()
+			true
+		}
+
+		R.id.action_add_manual ->
+		{
+			addManualConsole()
+			true
+		}
+
 		R.id.action_settings ->
 		{
 			Intent(this, SettingsActivity::class.java).also {
@@ -176,18 +159,12 @@ class MainActivity : AppCompatActivity()
 
 	private fun addManualConsole()
 	{
-		Intent(this, EditManualConsoleActivity::class.java).also {
-			it.putRevealExtra(binding.addManualButton, binding.rootLayout)
-			startActivity(it, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
-		}
+		startActivity(Intent(this, EditManualConsoleActivity::class.java))
 	}
 
 	private fun showRegistration()
 	{
-		Intent(this, RegistActivity::class.java).also {
-			it.putRevealExtra(binding.registerButton, binding.rootLayout)
-			startActivity(it, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
-		}
+		startActivity(Intent(this, RegistActivity::class.java))
 	}
 
 	private fun hostTriggered(host: DisplayHost)
