@@ -40,6 +40,20 @@ android {
             }
         }
     }
+    flavorDimensions "channel"
+    productFlavors {
+        stable {
+            dimension "channel"
+            // applicationId stays com.akichi.tv — the daily-use app
+        }
+        dev {
+            dimension "channel"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+            // installs side-by-side as com.akichi.tv.dev ("akichi dev")
+        }
+    }
+
     buildFeatures {
         viewBinding true
     }
