@@ -61,6 +61,8 @@ jobs:
         run: ./gradlew testStableDebugUnitTest --stacktrace
 
       - name: Build debug APK
+        env:
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
         run: ./gradlew assembleDebug --stacktrace
 
       - name: Upload debug APKs (stable + dev)

@@ -48,6 +48,8 @@ jobs:
         run: echo "${{ secrets.SIGNING_KEYSTORE_B64 }}" | base64 -d > app/akichi-signing.p12
 
       - name: Build stable APK
+        env:
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
         run: |
           chmod +x ./gradlew
           ./gradlew testStableDebugUnitTest assembleStableDebug --stacktrace

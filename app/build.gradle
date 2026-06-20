@@ -79,9 +79,9 @@ android {
         // identically — lets stable updates install in place without losing data.
         shared {
             storeFile file("akichi-signing.p12")
-            storePassword "REDACTED-PW"
+            storePassword System.getenv("SIGNING_STORE_PASSWORD") ?: ""
             keyAlias "akichi"
-            keyPassword "REDACTED-PW"
+            keyPassword System.getenv("SIGNING_STORE_PASSWORD") ?: ""
             storeType "PKCS12"
         }
     }
