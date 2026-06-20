@@ -105,8 +105,7 @@ class DisplayHostRecyclerViewAdapter(
 			val canEditDelete = host is ManualDisplayHost
 			if(canWakeup || canEditDelete)
 			{
-				it.menuButton.isVisible = true
-				it.menuButton.setOnClickListener { _ ->
+				val showMenu = {
 					val menu = PopupMenu(context, it.menuButton)
 					menu.menuInflater.inflate(R.menu.display_host, menu.menu)
 					menu.menu.findItem(R.id.action_wakeup).isVisible = canWakeup
@@ -124,11 +123,17 @@ class DisplayHostRecyclerViewAdapter(
 					}
 					menu.show()
 				}
+				it.menuButton.isVisible = true
+				it.menuButton.setOnClickListener { showMenu() }
+				// On TV the card is one focus target (blocksDescendants), so the overflow
+				// button can't be focused — long-press the card to reach Wake/Edit/Delete.
+				it.root.setOnLongClickListener { showMenu(); true }
 			}
 			else
 			{
 				it.menuButton.isGone = true
 				it.menuButton.setOnClickListener(null)
+				it.root.setOnLongClickListener(null)
 			}
 		}
 	}
