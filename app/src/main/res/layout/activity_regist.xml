@@ -137,7 +137,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/action_psn_login"
+                android:textColor="@color/accent"
                 app:icon="@drawable/ic_psn_id"
+                app:iconTint="@color/accent"
+                app:strokeColor="@color/accent"
                 app:layout_constraintTop_toBottomOf="@id/psnAccountIdHelpURLTextView"/>
 
             <com.google.android.material.textfield.TextInputLayout
