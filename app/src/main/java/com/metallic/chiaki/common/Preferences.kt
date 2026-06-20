@@ -35,7 +35,8 @@ class Preferences(context: Context)
 	enum class Codec(val value: String, @StringRes val title: Int, val codec: com.metallic.chiaki.lib.Codec)
 	{
 		CODEC_H264("h264", R.string.preferences_codec_title_h264, com.metallic.chiaki.lib.Codec.CODEC_H264),
-		CODEC_H265("h265", R.string.preferences_codec_title_h265, com.metallic.chiaki.lib.Codec.CODEC_H265)
+		CODEC_H265("h265", R.string.preferences_codec_title_h265, com.metallic.chiaki.lib.Codec.CODEC_H265),
+		CODEC_H265_HDR("h265_hdr", R.string.preferences_codec_title_h265_hdr, com.metallic.chiaki.lib.Codec.CODEC_H265_HDR)
 	}
 
 	companion object
