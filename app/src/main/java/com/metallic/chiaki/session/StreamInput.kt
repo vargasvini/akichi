@@ -68,14 +68,19 @@ class StreamInput(val context: Context, val preferences: Preferences)
 	private val swapCrossMoon = preferences.swapCrossMoon
 	private val controllerMapFix = preferences.controllerMapFix
 
-	// Sony DualSense (vendor 0x054C / product 0x0CE6). On Fire OS / Android 11-12 the
-	// system keylayout delivers a scrambled button/axis mapping for this controller
-	// (see CONTROLLER_DIAGNOSIS.md). When enabled, we undo that scramble.
+	// The scrambled DualSense keylayout only exists on Fire OS / Android <= 12. Auto-gate the fix
+	// to those environments so a correctly-mapped setup (Android 13+, USB) is never re-scrambled.
+	private val brokenKeylayoutEnv =
+		Build.MANUFACTURER.equals("Amazon", ignoreCase = true) || Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2
+
+	// Sony DualSense (vendor 0x054C / product 0x0CE6). On the affected environments the system
+	// keylayout delivers a scrambled button/axis mapping; when enabled we undo it (see
+	// CONTROLLER_DIAGNOSIS.md).
 	private var dualSenseDeviceId = Int.MIN_VALUE
 	private var dualSenseDeviceMatch = false
 	private fun isFireTvDualSense(device: InputDevice?): Boolean
 	{
-		if(!controllerMapFix || device == null)
+		if(!controllerMapFix || !brokenKeylayoutEnv || device == null)
 			return false
 		if(device.id != dualSenseDeviceId)
 		{
