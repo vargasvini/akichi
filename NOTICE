@@ -1,0 +1,22 @@
+akichi
+Copyright (C) 2026 the akichi authors
+
+This product is based on and includes source code from:
+
+  * Chiaki — https://git.sr.ht/~thestr4ng3r/chiaki
+    Copyright (C) Florian Märkl and contributors.
+
+  * chiaki-ng — https://github.com/streetpea/chiaki-ng
+    Copyright (C) Street Pea and contributors.
+
+Both upstream projects, and akichi as a whole, are licensed under the
+GNU Affero General Public License, version 3, with an OpenSSL linking
+exception (SPDX: LicenseRef-AGPL-3.0-only-OpenSSL). See the COPYING /
+LICENSE file for the full text.
+
+akichi is an independent project and is NOT affiliated with, endorsed by,
+or certified by Sony Interactive Entertainment LLC. "PlayStation", "PS4",
+"PS5" and related marks are trademarks of Sony Interactive Entertainment.
+
+In accordance with the AGPL-3.0, the complete corresponding source code of
+akichi is available at: https://github.com/vargasvini/akichi
