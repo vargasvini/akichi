@@ -109,7 +109,7 @@
                 android:text="@string/regist_psn_account_id_help"
                 android:gravity="center_horizontal"
                 android:textAppearance="?attr/textAppearanceBody1"
-                android:alpha="0.6"
+                android:alpha="0.85"
                 android:layout_marginTop="8dp"/>
 
             <com.google.android.material.textview.MaterialTextView

@@ -34,7 +34,7 @@
     <string name="regist_option_ps4_ge_7">PS4 ≥ 7.0, &lt; 8</string>
     <string name="regist_option_ps4_ge_8">PS4 ≥ 8.0</string>
     <string name="regist_option_ps5">PS5</string>
-    <string name="regist_psn_account_id_help">About obtaining your Account ID, see</string>
+    <string name="regist_psn_account_id_help">Your Account ID is an 8-byte Base64 value — NOT your username/Online ID. See how to get it:</string>
     <string name="regist_psn_account_id_help_url">https://vargasvini.github.io/akichi/psn-account-id.html</string>
     <string name="hint_regist_psn_online_id">PSN Online ID (username, case-sensitive)</string>
     <string name="hint_regist_psn_account_id">PSN Account ID (8 bytes, base64)</string>
