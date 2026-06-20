@@ -84,6 +84,7 @@
     <string name="preferences_fps_title_30">30</string>
     <string name="preferences_fps_title_60">60</string>
     <string name="preferences_bitrate_auto">Auto (%d)</string>
+    <string name="preferences_bitrate_summary">0 = Auto. Up to 100 Mbps; above ~50 the PS5 may cap the encoder, so higher rarely helps.</string>
     <string name="preferences_codec_title_h264">H264</string>
     <string name="preferences_codec_title_h265">H265 (PS5 only)</string>
     <string name="preferences_swap_cross_moon_title">Swap Cross/Moon and Box/Pyramid Buttons</string>
@@ -128,5 +129,6 @@
     <string name="preferences_resolution_key">stream_resolution</string>
     <string name="preferences_fps_key">stream_fps</string>
     <string name="preferences_bitrate_key">stream_bitrate</string>
+    <string name="preferences_bitrate_mbps_key">stream_bitrate_mbps</string>
     <string name="preferences_codec_key">stream_codec</string>
 </resources>

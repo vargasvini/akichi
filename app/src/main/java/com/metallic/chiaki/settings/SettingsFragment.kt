@@ -6,7 +6,6 @@ import android.app.Activity
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
-import android.text.InputType
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.*
@@ -51,9 +50,22 @@ class DataStore(val preferences: Preferences): PreferenceDataStore()
 	{
 		preferences.resolutionKey -> preferences.resolution.value
 		preferences.fpsKey -> preferences.fps.value
-		preferences.bitrateKey -> preferences.bitrate?.toString() ?: ""
 		preferences.codecKey -> preferences.codec.value
 		else -> defValue
+	}
+
+	override fun getInt(key: String?, defValue: Int) = when(key)
+	{
+		preferences.bitrateMbpsKey -> preferences.bitrateMbps
+		else -> defValue
+	}
+
+	override fun putInt(key: String?, value: Int)
+	{
+		when(key)
+		{
+			preferences.bitrateMbpsKey -> preferences.bitrateMbps = value
+		}
 	}
 
 	override fun putString(key: String, value: String?)
@@ -70,7 +82,6 @@ class DataStore(val preferences: Preferences): PreferenceDataStore()
 				val fps = Preferences.FPS.values().firstOrNull { it.value == value } ?: return
 				preferences.fps = fps
 			}
-			preferences.bitrateKey -> preferences.bitrate = value?.toIntOrNull()
 			preferences.codecKey ->
 			{
 				val codec = Preferences.Codec.values().firstOrNull { it.value == value } ?: return
@@ -110,22 +121,6 @@ class SettingsFragment: PreferenceFragmentCompat(), TitleFragment
 			it.entryValues = Preferences.fpsAll.map { fps -> fps.value }.toTypedArray()
 			it.entries = Preferences.fpsAll.map { fps -> getString(fps.title) }.toTypedArray()
 		}
-
-		val bitratePreference = preferenceScreen.findPreference<EditTextPreference>(getString(R.string.preferences_bitrate_key))
-		val bitrateSummaryProvider = Preference.SummaryProvider<EditTextPreference> {
-			preferences.bitrate?.toString() ?: getString(R.string.preferences_bitrate_auto, preferences.bitrateAuto)
-		}
-		bitratePreference?.let {
-			it.summaryProvider = bitrateSummaryProvider
-			it.setOnBindEditTextListener { editText ->
-				editText.hint = getString(R.string.preferences_bitrate_auto, preferences.bitrateAuto)
-				editText.inputType = InputType.TYPE_CLASS_NUMBER
-				editText.setText(preferences.bitrate?.toString() ?: "")
-			}
-		}
-		viewModel.bitrateAuto.observe(this, Observer {
-			bitratePreference?.summaryProvider = bitrateSummaryProvider
-		})
 
 		preferenceScreen.findPreference<ListPreference>(getString(R.string.preferences_codec_key))?.let {
 			it.entryValues = Preferences.codecAll.map { codec -> codec.value }.toTypedArray()

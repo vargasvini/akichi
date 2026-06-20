@@ -118,10 +118,13 @@ class Preferences(context: Context)
 		set(value) { sharedPreferences.edit().putString(fpsKey, value.value).apply() }
 
 	fun validateBitrate(bitrate: Int) = max(2000, min(100000, bitrate))
-	val bitrateKey get() = resources.getString(R.string.preferences_bitrate_key)
-	var bitrate
-		get() = sharedPreferences.getInt(bitrateKey, 0).let { if(it == 0) null else validateBitrate(it) }
-		set(value) { sharedPreferences.edit().putInt(bitrateKey, if(value != null) validateBitrate(value) else 0).apply() }
+	// bitrate is configured in Mbps; 0 means Auto (the resolution preset decides)
+	val bitrateMbpsKey get() = resources.getString(R.string.preferences_bitrate_mbps_key)
+	var bitrateMbps
+		get() = sharedPreferences.getInt(bitrateMbpsKey, 0)
+		set(value) { sharedPreferences.edit().putInt(bitrateMbpsKey, value).apply() }
+	// kbps used by the video profile; null = Auto
+	val bitrate: Int? get() = bitrateMbps.let { if(it == 0) null else validateBitrate(it * 1000) }
 	val bitrateAuto get() = videoProfileDefaultBitrate.bitrate
 	private val bitrateAutoSubject by lazy { BehaviorSubject.createDefault(bitrateAuto) }
 	val bitrateAutoObservable: Observable<Int> get() = bitrateAutoSubject

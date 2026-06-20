@@ -86,9 +86,15 @@
             app:summary="%s"
             app:icon="@drawable/ic_fps"/>
 
-        <EditTextPreference
-            app:key="@string/preferences_bitrate_key"
+        <SeekBarPreference
+            app:key="@string/preferences_bitrate_mbps_key"
             app:title="@string/preferences_bitrate_title"
+            app:summary="@string/preferences_bitrate_summary"
+            android:max="100"
+            app:min="0"
+            app:seekBarIncrement="1"
+            app:showSeekBarValue="true"
+            android:defaultValue="0"
             app:icon="@drawable/ic_bitrate"/>
 
         <ListPreference
