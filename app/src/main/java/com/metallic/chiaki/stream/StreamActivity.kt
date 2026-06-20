@@ -98,6 +98,9 @@ class StreamActivity : AppCompatActivity(), View.OnSystemUiVisibilityChangeListe
 			showOverlay()
 		}
 
+		// Explicit disconnect from the in-stream overlay; finishing tears the session down.
+		binding.disconnectButton.setOnClickListener { finish() }
+
 		//Display streaming
 		//viewModel.session.attachToTextureView(textureView)
 		viewModel.session.attachToSurfaceView(binding.surfaceView)
