@@ -93,7 +93,7 @@ class RegistActivity: AppCompatActivity(), RevealActivity
 		val psnOnlineId: String? = if(ps4Version == RegistViewModel.ConsoleVersion.PS4_LT_7) psnId else null
 		val psnAccountId: ByteArray? =
 			if(ps4Version != RegistViewModel.ConsoleVersion.PS4_LT_7)
-				try { Base64.decode(psnId, Base64.DEFAULT) } catch(e: IllegalArgumentException) { null }
+				accountIdToBytes(psnId)
 			else
 				null
 		val psnIdValid = when(ps4Version)
@@ -138,6 +138,12 @@ class RegistActivity: AppCompatActivity(), RevealActivity
 			startActivityForResult(it, REQUEST_REGIST)
 		}
 	}
+
+	// Accepts either the Base64 Account ID or the raw 19-digit account number, which we
+	// pack into 8 little-endian bytes (the PSN account-id format).
+	private fun accountIdToBytes(input: String): ByteArray? =
+		input.trim().toULongOrNull()?.let { psnAccountNumberToBytes(it) }
+			?: try { Base64.decode(input, Base64.DEFAULT) } catch(e: IllegalArgumentException) { null }
 
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
 	{
