@@ -87,7 +87,10 @@ android {
     }
     buildTypes {
         debug {
-            signingConfig signingConfigs.shared
+            // CI decodes akichi-signing.p12 from the SIGNING_KEYSTORE_B64 secret; if it's absent
+            // (e.g. a local build), fall back to the default debug key.
+            if (file("akichi-signing.p12").exists())
+                signingConfig signingConfigs.shared
         }
         release {
             minifyEnabled true

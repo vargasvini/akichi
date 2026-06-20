@@ -54,6 +54,9 @@ jobs:
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
+      - name: Decode signing keystore
+        run: echo "${{ secrets.SIGNING_KEYSTORE_B64 }}" | base64 -d > app/akichi-signing.p12
+
       - name: Run unit tests
         run: ./gradlew testStableDebugUnitTest --stacktrace
 
