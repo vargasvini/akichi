@@ -6,4 +6,7 @@
     <cache-path
         name="export_settings"
         path="export_settings/"/> <!-- must be in sync with SerializedSettings.kt -->
+    <cache-path
+        name="updates"
+        path="updates/"/> <!-- must be in sync with Updater.kt -->
 </paths>

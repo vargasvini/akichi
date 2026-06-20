@@ -1,0 +1,71 @@
+name: Release
+
+# Tag a commit (e.g. git tag v0.2.0 && git push --tags) to publish a stable release.
+on:
+  push:
+    tags: [ 'v*' ]
+  workflow_dispatch:
+
+env:
+  PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION: python
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install native build dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y libssl-dev protobuf-compiler python3-protobuf libopus-dev ffmpeg libavutil-dev libevdev-dev
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: Install protobuf python
+        run: pip install 'protobuf==3.20.3'
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install SDK platform, NDK and CMake
+        run: yes | sdkmanager "platforms;android-33" "build-tools;33.0.2" "ndk;25.2.9519653" "cmake;3.22.1" >/dev/null
+
+      - name: Decode signing keystore
+        run: echo "${{ secrets.SIGNING_KEYSTORE_B64 }}" | base64 -d > app/akichi-signing.p12
+
+      - name: Build stable APK
+        run: |
+          chmod +x ./gradlew
+          ./gradlew testStableDebugUnitTest assembleStableDebug --stacktrace
+
+      - name: Prepare release assets
+        run: |
+          cp app/build/outputs/apk/stable/debug/*.apk akichi-stable.apk
+          VC=$(grep -oP 'versionCode \K[0-9]+' app/build.gradle | head -1)
+          cat > version.json <<JSON
+          {
+            "versionCode": ${VC},
+            "versionName": "${GITHUB_REF_NAME}",
+            "apkUrl": "https://github.com/${GITHUB_REPOSITORY}/releases/latest/download/akichi-stable.apk",
+            "notes": "akichi ${GITHUB_REF_NAME}"
+          }
+          JSON
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "${GITHUB_REF_NAME}" akichi-stable.apk version.json --title "akichi ${GITHUB_REF_NAME}" --notes "akichi ${GITHUB_REF_NAME}" --repo "${GITHUB_REPOSITORY}"

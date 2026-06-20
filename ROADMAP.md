@@ -50,3 +50,16 @@ Everything is built and tested on the **dev** channel first, then promoted to **
   short **Downloader Code** (aftv.news) pointing at the APK URL for one-step installs. Same
   hosted APK feeds the in-app updater — one release pipeline. (Repo is private today; going
   public is the prerequisite for discoverability.)
+
+## Prepared, inert until "go public" (code is in place)
+The updater (`update/Updater.kt` + MainActivity prompt), the release pipeline
+(`.github/workflows/release.yml`, publishes APK + version.json on a `v*` tag) and the SEO
+landing page (`docs/index.html`) are all committed but do nothing until the repo is public,
+because the manifest/APK URLs must be publicly reachable. The signing keystore is already
+moved to the `SIGNING_KEYSTORE_B64` secret. **Go-public checklist:**
+1. Rotate the signing key (the old one is in git history) — generate a new keystore, update the
+   secret; one in-place-breaking install on the TV (re-migrate the registration once).
+2. Make the repo public (`gh repo edit --visibility public`).
+3. Enable GitHub Pages from `/docs` (the landing page) — gives the searchable URL.
+4. Tag a release (`git tag v0.2.0 && git push --tags`) → release.yml publishes the APK + version.json.
+5. Register a Downloader Code at aftv.news pointing to the landing page / APK.

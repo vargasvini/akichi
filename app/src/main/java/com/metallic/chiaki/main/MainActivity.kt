@@ -24,6 +24,7 @@ import com.metallic.chiaki.manualconsole.EditManualConsoleActivity
 import com.metallic.chiaki.regist.RegistActivity
 import com.metallic.chiaki.settings.SettingsActivity
 import com.metallic.chiaki.stream.StreamActivity
+import com.metallic.chiaki.update.Updater
 
 class MainActivity : AppCompatActivity()
 {
@@ -72,6 +73,29 @@ class MainActivity : AppCompatActivity()
 			discoveryMenuItem?.let { updateDiscoveryMenuItem(it, active) }
 			updateEmptyInfo()
 		})
+
+		checkForUpdate()
+	}
+
+	// Background self-update check; prompts the user when a newer published build exists.
+	private fun checkForUpdate()
+	{
+		Thread {
+			val update = try { Updater.check() } catch(e: Exception) { null } ?: return@Thread
+			runOnUiThread {
+				if(isFinishing)
+					return@runOnUiThread
+				MaterialAlertDialogBuilder(this)
+					.setTitle(R.string.update_available_title)
+					.setMessage(getString(R.string.update_available_message, update.versionName))
+					.setPositiveButton(R.string.action_update) { _, _ ->
+						Thread { try { Updater.downloadAndInstall(this, update) } catch(e: Exception) {} }.start()
+					}
+					.setNegativeButton(R.string.action_later) { _, _ -> }
+					.create()
+					.show()
+			}
+		}.start()
 	}
 
 	private fun updateEmptyInfo()

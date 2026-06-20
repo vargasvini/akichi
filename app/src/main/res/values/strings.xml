@@ -10,6 +10,10 @@
     <string name="action_reconnect">Reconnect</string>
     <string name="action_wakeup">Wakeup</string>
     <string name="action_disconnect">Disconnect</string>
+    <string name="update_available_title">Update available</string>
+    <string name="update_available_message">akichi %s is available. Update now?</string>
+    <string name="action_update">Update</string>
+    <string name="action_later">Later</string>
     <string name="action_psn_login">Sign in with PSN (fill Account ID)</string>
     <string name="psn_login_failed">Could not get your Account ID. Try again or enter it manually.</string>
     <string name="action_connect_immediately">Connect</string>
