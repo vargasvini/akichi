@@ -75,8 +75,20 @@ android {
     }
     signingConfigs {
         release
+        // Fixed debug-signing key (committed, low-sensitivity) so every CI build is signed
+        // identically — lets stable updates install in place without losing data.
+        shared {
+            storeFile file("akichi-signing.p12")
+            storePassword "REDACTED-PW"
+            keyAlias "akichi"
+            keyPassword "REDACTED-PW"
+            storeType "PKCS12"
+        }
     }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.shared
+        }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
