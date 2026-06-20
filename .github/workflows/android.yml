@@ -2,6 +2,9 @@ name: Android CI
 
 env:
   main_project_module: app
+  # nanopb's generator imports protoc-generated *_pb2 modules; the pure-python
+  # protobuf implementation avoids the stricter C++ descriptor checks.
+  PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION: python
 
 on:
   push:
@@ -31,7 +34,8 @@ jobs:
 
       - name: Install protobuf python
         run: |
-          pip install protobuf==3.12.4
+          pip install 'protobuf==3.20.3'
+          python3 -c "import google.protobuf; from google.protobuf.internal import builder; print('protobuf', google.protobuf.__version__, 'builder ok')"
           protoc --version
 
       - name: Set up JDK 17
