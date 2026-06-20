@@ -42,7 +42,11 @@ Everything is built and tested on the **dev** channel first, then promoted to **
   (needs the `REQUEST_INSTALL_PACKAGES` permission; the user taps one system confirm). Because
   every build shares the committed signing key, it is an **in-place update — no uninstall, data
   preserved**. The consistent-signing work already done is the prerequisite.
-- **Listing in the Downloader app (Fire TV).** Downloader has no real app store, but the
-  standard path is: host the APK at a stable URL (GitHub Releases) and register a short
-  **Downloader Code** (via aftv.news) that maps to it — users just type the code to install.
-  The same hosted APK feeds the in-app updater, so the two share one release pipeline.
+- **Appearing in the Downloader app (Fire TV).** Verified on-device: Downloader is a browser
+  and its "Search Term" runs a Google web search (go.aftvnews.com/googlesearch?q=...). So chiaki
+  shows up purely because of its **web presence** — there is no Downloader app registry. For
+  akichi to appear the same way: make the repo + Releases **public** and add a small landing
+  page (e.g. GitHub Pages) so search engines index "akichi" + its APK link. Plus register a
+  short **Downloader Code** (aftv.news) pointing at the APK URL for one-step installs. Same
+  hosted APK feeds the in-app updater — one release pipeline. (Repo is private today; going
+  public is the prerequisite for discoverability.)
