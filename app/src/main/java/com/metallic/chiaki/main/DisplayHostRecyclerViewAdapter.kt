@@ -90,6 +90,16 @@ class DisplayHostRecyclerViewAdapter(
 			)
 			it.root.setOnClickListener { clickCallback(host) }
 
+			// State-aware primary action: register if unpaired, wake if asleep, otherwise connect.
+			it.actionTextView.setText(
+				when
+				{
+					host.registeredHost == null -> R.string.card_action_register
+					host is DiscoveredDisplayHost && host.discoveredHost.state == DiscoveryHost.State.STANDBY -> R.string.card_action_wake
+					else -> R.string.card_action_connect
+				}
+			)
+
 			val canWakeup = host.registeredHost != null
 			val canEditDelete = host is ManualDisplayHost
 			if(canWakeup || canEditDelete)

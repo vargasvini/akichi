@@ -57,6 +57,9 @@ android {
     buildFeatures {
         viewBinding true
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -128,4 +131,5 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$room_version"
     implementation "com.squareup.moshi:moshi:1.14.0"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:1.14.0"
+    testImplementation "junit:junit:4.13.2"
 }

@@ -122,6 +122,9 @@
     <string name="preferences_export_settings_key">export_settings</string>
     <string name="preferences_swap_cross_moon_key">swap_cross_moon</string>
     <string name="preferences_controller_map_fix_key">controller_map_fix</string>
+    <string name="card_action_connect">Connect</string>
+    <string name="card_action_wake">Wake</string>
+    <string name="card_action_register">Register</string>
     <string name="preferences_resolution_key">stream_resolution</string>
     <string name="preferences_fps_key">stream_fps</string>
     <string name="preferences_bitrate_key">stream_bitrate</string>

@@ -212,49 +212,21 @@ class StreamInput(val context: Context, val preferences: Preferences)
 	}
 
 	// Corrective mapping for a DualSense delivered through the broken Fire OS / Android 11-12
-	// keylayout. The physical-button -> received-keycode scramble is undone here.
-	// (see CONTROLLER_DIAGNOSIS.md for the full evidence table)
+	// keylayout. The mapping table lives in FireTvDualSenseMapping (unit-tested).
 	private fun dispatchKeyEventFireTvDualSense(event: KeyEvent): Boolean
 	{
 		val down = event.action == KeyEvent.ACTION_DOWN
-
-		// Physical L2/R2 arrive as BUTTON_L1/BUTTON_R1 (digital). Feed the trigger state as a
-		// digital fallback; the analog value comes from AXIS_RX/AXIS_RY in onGenericMotionEvent.
-		when(event.keyCode)
+		when(val action = FireTvDualSenseMapping.actionFor(event.keyCode, swapCrossMoon))
 		{
-			KeyEvent.KEYCODE_BUTTON_L1 -> {
-				keyControllerState.l2State = if(down) UByte.MAX_VALUE else 0U
-				controllerStateUpdated()
-				return true
-			}
-			KeyEvent.KEYCODE_BUTTON_R1 -> {
-				keyControllerState.r2State = if(down) UByte.MAX_VALUE else 0U
-				controllerStateUpdated()
-				return true
-			}
+			null -> return false
+			// physical L2/R2 (digital); the analog value still comes from AXIS_RX/AXIS_RY below
+			FireTvDualSenseMapping.Action.L2 -> keyControllerState.l2State = if(down) UByte.MAX_VALUE else 0U
+			FireTvDualSenseMapping.Action.R2 -> keyControllerState.r2State = if(down) UByte.MAX_VALUE else 0U
+			is FireTvDualSenseMapping.Action.Button ->
+				keyControllerState.buttons = keyControllerState.buttons.run {
+					if(down) this or action.mask else this and action.mask.inv()
+				}
 		}
-
-		val buttonMask: UInt = when(event.keyCode)
-		{
-			KeyEvent.KEYCODE_BUTTON_A -> if(swapCrossMoon) ControllerState.BUTTON_MOON else ControllerState.BUTTON_CROSS       // Cross
-			KeyEvent.KEYCODE_BUTTON_B -> if(swapCrossMoon) ControllerState.BUTTON_CROSS else ControllerState.BUTTON_MOON       // Circle
-			KeyEvent.KEYCODE_BUTTON_X -> if(swapCrossMoon) ControllerState.BUTTON_PYRAMID else ControllerState.BUTTON_BOX       // Square
-			KeyEvent.KEYCODE_BUTTON_C -> if(swapCrossMoon) ControllerState.BUTTON_BOX else ControllerState.BUTTON_PYRAMID       // Triangle
-			KeyEvent.KEYCODE_BUTTON_Y -> ControllerState.BUTTON_L1          // physical L1
-			KeyEvent.KEYCODE_BUTTON_Z -> ControllerState.BUTTON_R1          // physical R1
-			KeyEvent.KEYCODE_BUTTON_L2 -> ControllerState.BUTTON_SHARE      // physical Create
-			KeyEvent.KEYCODE_BUTTON_R2 -> ControllerState.BUTTON_OPTIONS    // physical Options
-			KeyEvent.KEYCODE_BUTTON_SELECT -> ControllerState.BUTTON_L3     // physical L3 (left stick click)
-			KeyEvent.KEYCODE_BUTTON_START -> ControllerState.BUTTON_R3      // physical R3 (right stick click)
-			KeyEvent.KEYCODE_BUTTON_MODE -> ControllerState.BUTTON_PS       // physical PS
-			KeyEvent.KEYCODE_BUTTON_THUMBL -> ControllerState.BUTTON_TOUCHPAD // physical touchpad click
-			else -> return false
-		}
-
-		keyControllerState.buttons = keyControllerState.buttons.run {
-			if(down) this or buttonMask else this and buttonMask.inv()
-		}
-
 		controllerStateUpdated()
 		return true
 	}

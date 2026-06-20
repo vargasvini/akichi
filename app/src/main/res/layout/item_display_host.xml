@@ -109,9 +109,21 @@
             tools:text="Persona 5"
             app:layout_constraintTop_toBottomOf="@id/idTextView"
             app:layout_constraintStart_toStartOf="@id/nameTextView"
-            app:layout_constraintEnd_toStartOf="@id/menuButton"
+            app:layout_constraintEnd_toStartOf="@id/actionTextView"
             android:maxLines="1"
             android:ellipsize="end"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/actionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:textColor="?attr/colorAccent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Connect"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
