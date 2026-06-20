@@ -6,6 +6,9 @@
         <item name="colorOnPrimary">#ffffff</item>
         <item name="colorSecondary">@color/accent</item>
         <item name="colorOnSecondary">#000000</item>
+        <!-- Accent-tinted focus/press highlight so D-pad focus on preference rows and
+             menus is clearly visible on TV (consistent with the card/list focus rings). -->
+        <item name="android:colorControlHighlight">#4D7C5CFF</item>
         <item name="android:statusBarColor">?attr/colorPrimarySurface</item>
         <item name="android:navigationBarColor">?attr/colorPrimarySurface</item>
         <item name="materialAlertDialogTheme">@style/AppTheme.AlertDialog</item>
