@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Subtle grow-on-focus for D-pad navigation; pairs with card_focus_foreground. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true">
+        <set>
+            <objectAnimator android:propertyName="scaleX" android:valueTo="1.04" android:duration="150" />
+            <objectAnimator android:propertyName="scaleY" android:valueTo="1.04" android:duration="150" />
+        </set>
+    </item>
+    <item>
+        <set>
+            <objectAnimator android:propertyName="scaleX" android:valueTo="1.0" android:duration="150" />
+            <objectAnimator android:propertyName="scaleY" android:valueTo="1.0" android:duration="150" />
+        </set>
+    </item>
+</selector>

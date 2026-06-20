@@ -115,8 +115,8 @@
     <string name="action_edit">Edit</string>
     <string name="session_logs_empty_info">No Session Logs recorded.</string>
     <string name="registered_hosts_empty_info">No Consoles registered.</string>
-    <string name="display_hosts_empty_discovery_off_info">No consoles added yet.\nEnable Discovery to automatically find consoles on your local network.</string>
-    <string name="display_hosts_empty_discovery_on_info">No consoles added or discovered.</string>
+    <string name="display_hosts_empty_discovery_off_info">No consoles yet.\n\nTurn on Discovery (top-right) to automatically find your PlayStation.\n\nYour PS5 or PS4 must be connected to the same Wi-Fi network as this device.\n\nThe + button is only for adding a console manually by IP — you don\'t need it for normal use.</string>
+    <string name="display_hosts_empty_discovery_on_info">Searching for your PlayStation…\n\nMake sure your PS5 or PS4 is turned on (or in Rest Mode) and connected to the SAME Wi-Fi network as this device.\n\nNothing to click here — it appears automatically once found.\n\n(The + button is only for adding a console manually by IP.)</string>
 
     <!-- Don't localize these -->
     <string name="preferences_discovery_enabled_key">discovery_enabled</string>

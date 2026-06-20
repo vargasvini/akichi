@@ -13,7 +13,9 @@
     android:layout_marginRight="10dp"
     android:layout_marginBottom="0dp"
     android:elevation="4dp"
-    android:foreground="?android:attr/selectableItemBackground">
+    android:focusable="true"
+    android:foreground="@drawable/card_focus_foreground"
+    android:stateListAnimator="@animator/focus_lift">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
