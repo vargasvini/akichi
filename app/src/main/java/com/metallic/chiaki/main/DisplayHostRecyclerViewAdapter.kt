@@ -75,17 +75,18 @@ class DisplayHostRecyclerViewAdapter(
 					""
 			} ?: ""
 			it.discoveredIndicatorLayout.visibility = if(host is DiscoveredDisplayHost) View.VISIBLE else View.GONE
-			it.stateIndicatorImageView.setImageResource(
+			// One clean gamepad glyph, tinted by state: green = ready, amber = standby, grey = unknown.
+			it.stateIndicatorImageView.setImageResource(R.drawable.ic_gamepad)
+			it.stateIndicatorImageView.setColorFilter(
 				when
 				{
 					host is DiscoveredDisplayHost -> when(host.discoveredHost.state)
 					{
-						DiscoveryHost.State.STANDBY -> if(host.isPS5) R.drawable.ic_console_ps5_standby else R.drawable.ic_console_standby
-						DiscoveryHost.State.READY -> if(host.isPS5) R.drawable.ic_console_ps5_ready else R.drawable.ic_console_ready
-						else -> if(host.isPS5) R.drawable.ic_console_ps5 else R.drawable.ic_console
+						DiscoveryHost.State.READY -> 0xFF5DCAA5.toInt()
+						DiscoveryHost.State.STANDBY -> 0xFFEF9F27.toInt()
+						else -> 0xFF9893A8.toInt()
 					}
-					host.isPS5 -> R.drawable.ic_console_ps5
-					else -> R.drawable.ic_console
+					else -> 0xFF9893A8.toInt()
 				}
 			)
 			it.root.setOnClickListener { clickCallback(host) }
