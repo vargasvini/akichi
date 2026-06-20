@@ -102,6 +102,14 @@ void android_chiaki_video_decoder_set_surface(AndroidChiakiVideoDecoder *decoder
 	AMediaFormat_setInt32(format, AMEDIAFORMAT_KEY_WIDTH, decoder->target_width);
 	AMediaFormat_setInt32(format, AMEDIAFORMAT_KEY_HEIGHT, decoder->target_height);
 
+	// Realtime streaming tuning: tell the codec we want lowest latency, not throughput.
+	// PRIORITY 0 = realtime; LOW_LATENCY disables the decoder's frame reordering/lookahead
+	// (API 30+, which is our minSdk), cutting a few frames of buffering.
+	AMediaFormat_setInt32(format, AMEDIAFORMAT_KEY_PRIORITY, 0);
+#if __ANDROID_API__ >= 30
+	AMediaFormat_setInt32(format, AMEDIAFORMAT_KEY_LOW_LATENCY, 1);
+#endif
+
 	media_status_t r = AMediaCodec_configure(decoder->codec, format, decoder->window, NULL, 0);
 	if(r != AMEDIA_OK)
 	{
