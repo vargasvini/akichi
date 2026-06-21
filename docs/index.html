@@ -54,6 +54,22 @@
     footer{ border-top:1px solid var(--line); padding:2.5rem 0; color:var(--dim); font-size:.88rem; text-align:center; }
     @media(max-width:760px){ .hero h1{ font-size:2.2rem; } .feature-row{ grid-template-columns:1fr; } .feature-row.rev{ direction:ltr; } .nav{ display:none; } }
   </style>
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"akichi",
+   "applicationCategory":"GameApplication","operatingSystem":"Android TV, Fire TV",
+   "description":"Free, open-source PlayStation Remote Play client for Fire TV and Android TV, with a fix for the scrambled DualSense controller mapping on Fire TV.",
+   "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+   "url":"https://vargasvini.github.io/akichi/"}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"Does a DualSense work with Remote Play on Fire TV?","acceptedAnswer":{"@type":"Answer","text":"Yes. Fire OS scrambles the DualSense button layout (L1/R1 act as L2/R2 and Options/Create don't register). akichi automatically corrects this so your DualSense works correctly."}},
+   {"@type":"Question","name":"How do I install akichi on a Fire TV?","acceptedAnswer":{"@type":"Answer","text":"Open the Downloader app and enter code 2031445. It downloads and installs automatically. Then open akichi and your PS5 or PS4 appears when it is on the same Wi-Fi network."}},
+   {"@type":"Question","name":"Is akichi related to Chiaki?","acceptedAnswer":{"@type":"Answer","text":"Yes. akichi is an open-source app built on Chiaki and chiaki-ng, focused on the TV experience with fixes for Fire TV."}},
+   {"@type":"Question","name":"Is akichi free?","acceptedAnswer":{"@type":"Answer","text":"Yes, akichi is completely free and open-source (AGPL-3.0). No ads, no tracking."}}
+  ]}
+  </script>
 </head>
 <body>
   <header><div class="wrap">
@@ -131,6 +147,16 @@
         <li>Open akichi — your PS5/PS4 appears automatically when it’s on the <strong>same Wi-Fi network</strong>.</li>
       </ol>
       <p class="sub" style="margin-top:1.5rem">Requires Fire TV / Android TV (Android 11+), a PS4/PS5 with Remote Play enabled, and a controller paired to the TV box.</p>
+    </section>
+
+    <section id="faq">
+      <h2>FAQ</h2>
+      <p class="sub">The questions people actually search for.</p>
+      <div class="step"><h3 style="margin:.2rem 0 .4rem">Does a DualSense work with Remote Play on Fire TV?</h3><p style="color:var(--mut);margin:0">Yes &mdash; but Fire OS scrambles the DualSense button layout (L1/R1 act like L2/R2 and Options/Create don&rsquo;t register). <strong>akichi automatically corrects this</strong>, so your DualSense works correctly on Fire TV.</p></div>
+      <div class="step"><h3 style="margin:.2rem 0 .4rem">How do I install akichi on a Fire TV?</h3><p style="color:var(--mut);margin:0">Open the <strong>Downloader</strong> app and enter code <code>2031445</code> &mdash; it downloads and installs automatically. Then open akichi and your PS5/PS4 appears when it&rsquo;s on the same Wi-Fi.</p></div>
+      <div class="step"><h3 style="margin:.2rem 0 .4rem">Is akichi related to Chiaki?</h3><p style="color:var(--mut);margin:0">Yes &mdash; akichi is open-source and built on <strong>Chiaki / chiaki-ng</strong>, focused on the living-room TV experience with fixes for Fire TV.</p></div>
+      <div class="step"><h3 style="margin:.2rem 0 .4rem">Is akichi free?</h3><p style="color:var(--mut);margin:0">Completely free and open-source (AGPL-3.0). No ads, no tracking.</p></div>
+      <div class="step"><h3 style="margin:.2rem 0 .4rem">Why won&rsquo;t my PS5 show up?</h3><p style="color:var(--mut);margin:0">Make sure your PS5/PS4 is on the <strong>same Wi-Fi network</strong> and Remote Play is enabled. It appears automatically &mdash; you don&rsquo;t need to add it manually.</p></div>
     </section>
   </div>
 
