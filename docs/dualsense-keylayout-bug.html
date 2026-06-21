@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Fire OS keylayout that scrambles the DualSense</title>
+  <meta name="description" content="On Fire TV the DualSense buttons come out wrong in every Remote Play app: L1/R1 act like the triggers, Options and Create do nothing. It's a shifted key layout file in Fire OS. Here's the diagnosis and the fix.">
+  <meta name="keywords" content="dualsense fire tv keylayout, fire os controller bug, dualsense buttons wrong android, vendor 054c product 0ce6, fire tv remote play controller mapping, android keylayout dualsense">
+  <meta property="og:title" content="The Fire OS keylayout that scrambles the DualSense">
+  <meta property="og:description" content="Why a DualSense comes out scrambled on Fire TV, and how akichi corrects it.">
+  <meta name="theme-color" content="#7C5CFF">
+  <style>
+    :root{ --bg:#15131F; --bg2:#1C1930; --card:#221D33; --line:#2C2740; --accent:#7C5CFF; --fg:#F4F2FA; --mut:#B6B1C6; --dim:#79748A; }
+    *{ box-sizing:border-box; }
+    body{ font-family:Georgia,'Times New Roman',serif; background:var(--bg); color:var(--fg); margin:0; line-height:1.75; }
+    .wrap{ max-width:740px; margin:0 auto; padding:0 1.3rem; }
+    a{ color:var(--accent); }
+    header{ border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+    header .wrap{ display:flex; align-items:center; height:58px; }
+    .brand{ font-weight:800; font-size:1.25rem; text-decoration:none; color:var(--fg); }
+    .brand span{ color:var(--accent); }
+    h1{ font-size:2rem; line-height:1.25; margin:2.4rem 0 .4rem; }
+    .meta{ color:var(--dim); font-size:.9rem; font-family:system-ui,sans-serif; margin-bottom:2rem; }
+    h2{ font-size:1.4rem; margin:2.4rem 0 .6rem; }
+    p{ margin:1rem 0; }
+    ul{ margin:1rem 0; padding-left:1.3rem; }
+    li{ margin:.4rem 0; }
+    code{ background:var(--bg2); padding:.1rem .4rem; border-radius:5px; font-size:.9em; }
+    pre{ background:#0F0D17; border:1px solid var(--line); border-radius:10px; padding:1rem 1.2rem; overflow-x:auto; font-size:.86rem; line-height:1.55; }
+    pre code{ background:none; padding:0; }
+    footer{ border-top:1px solid var(--line); margin-top:3rem; padding:2rem 0; color:var(--dim); font-size:.82rem; font-family:system-ui,sans-serif; }
+    .home{ font-family:system-ui,sans-serif; }
+  </style>
+</head>
+<body>
+  <header><div class="wrap"><a class="brand" href="./">aki<span>chi</span></a></div></header>
+  <div class="wrap">
+    <h1>The Fire OS keylayout that scrambles the DualSense</h1>
+    <p class="meta">A short diagnosis of why a DualSense behaves wrong on Fire TV, and how I ended up fixing it.</p>
+
+    <p>Connect a DualSense to a Fire TV, open any Remote Play client, and the buttons are in the wrong places. L1 and R1 act like the triggers. The analog triggers don't pull. Options and Create do nothing at all. The interesting part is that it happens in <em>every</em> app the same way, which is usually a sign the app isn't the one to blame.</p>
+
+    <p>It isn't. The mapping is already wrong by the time any app sees it.</p>
+
+    <h2>Confirming it's the system, not the app</h2>
+    <p>Android turns a gamepad's raw hardware scancodes into the key codes apps actually receive using a "key layout" file. You can watch both ends with <code>adb shell getevent</code> (raw events from the kernel) and the key codes the framework reports. On a Fire TV, the raw events are fine, but the key codes that come out the other side are shifted. So the controller is sending the right thing and the system is relabelling it.</p>
+
+    <h2>The cause: a shifted .kl file</h2>
+    <p>Those key layout files live in <code>/system/usr/keylayout/</code>. Controllers the system recognizes get a device-specific one, named by USB vendor and product id. The DualSense shows up as vendor <code>054c</code>, product <code>0ce6</code>, so it gets <code>Vendor_054c_Product_0ce6.kl</code>. On recent Fire OS builds the mapping in that file is off. In practice:</p>
+    <ul>
+      <li>The shoulder buttons (<strong>L1 / R1</strong>) report as the trigger buttons (<strong>L2 / R2</strong>).</li>
+      <li>The analog triggers arrive on <code>AXIS_RX</code> / <code>AXIS_RY</code> instead of <code>AXIS_LTRIGGER</code> / <code>AXIS_RTRIGGER</code>.</li>
+      <li><strong>Create</strong> and <strong>Options</strong> don't map to anything the app receives.</li>
+    </ul>
+    <p>Trusting the system mapping is the right default literally everywhere else, so any client that does the sensible thing inherits the scramble. There's nothing to fix in the protocol or the decoder. It's input, and it's upstream of the app.</p>
+
+    <h2>The fix</h2>
+    <p>akichi undoes the relabelling itself, but only where it has to. Two guards keep it from ever touching a setup that's already correct:</p>
+    <pre><code>// The scramble is an Amazon Fire OS thing, so only ever remap on Amazon devices.
+// On a phone, a non-Amazon Android TV box, or USB on desktop, this is a no-op.
+private val brokenKeylayoutEnv = Build.MANUFACTURER.equals("Amazon", ignoreCase = true)
+
+private fun isFireTvDualSense(device: InputDevice?): Boolean {
+    if (!controllerMapFix || !brokenKeylayoutEnv || device == null) return false
+    // Sony DualSense: vendor 0x054C, product 0x0CE6
+    return device.vendorId == 0x054C && device.productId == 0x0CE6
+}</code></pre>
+    <p>When both hold, akichi intercepts the key events, maps each one back to what it should have been, and reads the analog triggers off <code>AXIS_RX</code> / <code>AXIS_RY</code>. From the PS5's side the controller is just a normal DualSense again. The full corrective table and the axis handling are in the source if you want the exact mapping.</p>
+    <p>It defaults on for Fire TV and off everywhere else, so there's nothing to configure, and it can't break a controller that was already working.</p>
+
+    <h2>Why it wasn't already fixed</h2>
+    <p>The original <a href="https://git.sr.ht/~thestr4ng3r/chiaki">Chiaki</a> was archived back in 2021. <a href="https://github.com/streetpea/chiaki-ng">chiaki-ng</a>, the fork that's still maintained, is built around desktop and the Steam Deck, where this bug doesn't exist: Steam Input handles mapping, and a Steam Deck isn't a DualSense to begin with. Nobody was looking at the Fire TV case, so it just sat there. That's most of the reason <a href="./">akichi</a> exists.</p>
+
+    <p class="home">Source and the full mapping table: <a href="https://github.com/vargasvini/akichi">github.com/vargasvini/akichi</a>. If you just want it working on your Fire TV, open the Downloader app and enter code <code>2031445</code>.</p>
+  </div>
+  <footer><div class="wrap">
+    akichi is independent and is not affiliated with, endorsed by, or certified by Sony Interactive Entertainment. “PlayStation” and “DualSense” are trademarks of Sony Interactive Entertainment.
+  </div></footer>
+</body>
+</html>
