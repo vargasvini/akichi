@@ -45,6 +45,7 @@
     <string name="regist_option_ps5">PS5</string>
     <string name="regist_psn_account_id_help">Not your username! Tap “Sign in with PSN” above to fill this automatically — or paste your 19-digit PSN account number (we convert it) or the Base64 Account ID. Need help?</string>
     <string name="regist_psn_account_id_help_url">https://vargasvini.github.io/akichi/psn-account-id.html</string>
+    <string name="regist_broadcast_help">Sends the pairing request to your whole Wi-Fi network instead of one IP. Leave it on if you don\'t know your console\'s exact IP address.</string>
     <string name="hint_regist_psn_online_id">PSN Online ID (username, case-sensitive)</string>
     <string name="hint_regist_psn_account_id">PSN Account ID — Base64 or 19-digit number</string>
     <string name="hint_regist_pin">PIN</string>
