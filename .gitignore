@@ -18,3 +18,6 @@ keystore.jks
 third-party/third-party.rar
 
 app/akichi-signing.p12
+
+# local dev (preview server config)
+.claude/
