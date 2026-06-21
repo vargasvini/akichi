@@ -4,36 +4,139 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>akichi — Remote Play for PS5 &amp; PS4 on Fire TV / Android TV (chiaki fork)</title>
-  <meta name="description" content="akichi is a free PlayStation Remote Play client for Fire TV and Android TV. Stream your PS5 or PS4 to your TV with a DualSense controller. A modern chiaki fork with a Fire TV controller fix. Download the APK or install via Downloader.">
-  <meta name="keywords" content="akichi, chiaki, chiaki fire tv, remote play, ps5 remote play, ps4 remote play, remote ps5, remote ps4, playstation remote play fire tv, android tv remote play, dualsense fire tv, chiaki android, chiaki apk">
+  <meta name="description" content="akichi is a free, open-source PlayStation Remote Play client for Fire TV and Android TV. Stream your PS5 or PS4 to your TV with a DualSense controller. A modern chiaki fork with a Fire TV controller fix, low latency and HDR. Download the APK or install via Downloader.">
+  <meta name="keywords" content="akichi, chiaki, chiaki fire tv, remote play, ps5 remote play, ps4 remote play, remote ps5, remote ps4, playstation remote play fire tv, android tv remote play, dualsense fire tv, chiaki android, chiaki apk, remote play fire tv stick">
   <meta property="og:title" content="akichi — Remote Play for PS5 &amp; PS4 on Fire TV">
-  <meta property="og:description" content="Stream your PS5/PS4 to your Fire TV or Android TV. Free, open-source chiaki fork with a Fire TV controller fix.">
+  <meta property="og:description" content="Stream your PS5/PS4 to your Fire TV or Android TV. Free, open-source chiaki fork, TV-first, with a Fire TV controller fix, low latency and HDR.">
+  <meta property="og:image" content="https://vargasvini.github.io/akichi/assets/hero_home.png">
   <meta property="og:type" content="website">
+  <meta name="theme-color" content="#7C5CFF">
   <style>
-    body { font-family: system-ui, sans-serif; background:#15131F; color:#fff; margin:0; padding:0 1.25rem; }
-    .wrap { max-width: 680px; margin: 0 auto; padding: 3rem 0; }
-    h1 { color:#7C5CFF; font-size: 2.2rem; margin-bottom:.25rem; }
-    .tag { color:#A8A4B8; margin-top:0; }
-    a.btn { display:inline-block; background:#7C5CFF; color:#fff; text-decoration:none; font-weight:600; padding:.85rem 1.6rem; border-radius:12px; margin:1rem 0; }
-    code { background:#221D33; padding:.15rem .4rem; border-radius:6px; }
-    .muted { color:#79748A; font-size:.9rem; }
-    h2 { color:#fff; margin-top:2rem; }
+    :root{ --bg:#15131F; --bg2:#1C1930; --card:#221D33; --line:#2C2740; --accent:#7C5CFF; --fg:#F4F2FA; --mut:#A8A4B8; --dim:#79748A; }
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{ font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--fg); margin:0; line-height:1.6; }
+    .wrap{ max-width:1040px; margin:0 auto; padding:0 1.25rem; }
+    a{ color:var(--accent); }
+    header{ position:sticky; top:0; background:rgba(21,19,31,.82); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); z-index:10; }
+    header .wrap{ display:flex; align-items:center; justify-content:space-between; height:60px; }
+    .brand{ font-weight:800; font-size:1.3rem; letter-spacing:.5px; }
+    .brand span{ color:var(--accent); }
+    .nav a{ color:var(--mut); text-decoration:none; margin-left:1.25rem; font-size:.95rem; }
+    .nav a:hover{ color:var(--fg); }
+    .btn{ display:inline-block; background:var(--accent); color:#fff!important; text-decoration:none; font-weight:700; padding:.9rem 1.7rem; border-radius:12px; transition:transform .12s ease, box-shadow .12s ease; box-shadow:0 8px 24px rgba(124,92,255,.35); }
+    .btn:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(124,92,255,.45); }
+    .btn.ghost{ background:transparent; color:var(--fg)!important; border:1px solid var(--line); box-shadow:none; }
+    .hero{ text-align:center; padding:4.5rem 0 2rem; }
+    .hero h1{ font-size:3rem; line-height:1.1; margin:.2rem 0 .6rem; }
+    .hero h1 b{ color:var(--accent); }
+    .hero p{ color:var(--mut); font-size:1.25rem; max-width:680px; margin:0 auto 1.8rem; }
+    .cta{ display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; }
+    .shot{ width:100%; border-radius:16px; border:1px solid var(--line); display:block; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+    .hero .shot{ margin-top:2.5rem; }
+    .badges{ display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; margin-top:1.2rem; }
+    .badge{ background:var(--card); border:1px solid var(--line); color:var(--mut); padding:.35rem .8rem; border-radius:999px; font-size:.85rem; }
+    section{ padding:3.5rem 0; }
+    h2{ font-size:2rem; text-align:center; margin:0 0 .4rem; }
+    .sub{ color:var(--mut); text-align:center; max-width:620px; margin:0 auto 2.5rem; }
+    .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.1rem; }
+    .feat{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:1.5rem; }
+    .feat .ic{ font-size:1.7rem; }
+    .feat h3{ margin:.6rem 0 .4rem; font-size:1.15rem; }
+    .feat p{ color:var(--mut); margin:0; font-size:.98rem; }
+    .feature-row{ display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:center; margin:2.5rem 0; }
+    .feature-row.rev{ direction:rtl; } .feature-row.rev > *{ direction:ltr; }
+    .feature-row h3{ font-size:1.5rem; margin:0 0 .6rem; }
+    .feature-row p{ color:var(--mut); margin:0; }
+    .pill{ display:inline-block; background:rgba(124,92,255,.15); color:var(--accent); border:1px solid rgba(124,92,255,.4); padding:.2rem .7rem; border-radius:999px; font-size:.8rem; font-weight:600; margin-bottom:.8rem; }
+    .install ol{ max-width:680px; margin:0 auto; font-size:1.05rem; }
+    .install code{ background:var(--bg2); padding:.15rem .45rem; border-radius:6px; }
+    footer{ border-top:1px solid var(--line); padding:2.5rem 0; color:var(--dim); font-size:.88rem; text-align:center; }
+    @media(max-width:760px){ .hero h1{ font-size:2.2rem; } .feature-row{ grid-template-columns:1fr; } .feature-row.rev{ direction:ltr; } .nav{ display:none; } }
   </style>
 </head>
 <body>
+  <header><div class="wrap">
+    <div class="brand">aki<span>chi</span></div>
+    <nav class="nav">
+      <a href="#features">Features</a>
+      <a href="#install">Install</a>
+      <a href="https://github.com/vargasvini/akichi">GitHub</a>
+    </nav>
+  </div></header>
+
   <div class="wrap">
-    <h1>akichi</h1>
-    <p class="tag">Remote Play for <strong>PS5</strong> and <strong>PS4</strong> on Fire TV &amp; Android TV — a modern <strong>chiaki</strong> fork, TV-first, with a Fire TV DualSense controller fix.</p>
+    <section class="hero">
+      <h1>Remote Play for PS5 &amp; PS4,<br><b>built for the TV.</b></h1>
+      <p>Stream your PlayStation to a Fire TV or Android TV box and play with a real controller — over your home network or the internet.</p>
+      <div class="cta">
+        <a class="btn" href="https://github.com/vargasvini/akichi/releases/latest/download/akichi-stable.apk">Download the APK</a>
+        <a class="btn ghost" href="#install">How to install</a>
+      </div>
+      <div class="badges">
+        <span class="badge">Fire TV &amp; Android TV</span>
+        <span class="badge">DualSense fix</span>
+        <span class="badge">Low latency</span>
+        <span class="badge">HDR</span>
+        <span class="badge">Free &amp; open-source</span>
+      </div>
+      <img class="shot" src="assets/hero_home.png" alt="akichi home screen on a TV, showing a PlayStation 5 console card">
+    </section>
 
-    <a class="btn" href="https://github.com/vargasvini/akichi/releases/latest/download/akichi-stable.apk">Download the latest APK</a>
+    <section id="features">
+      <h2>Why akichi</h2>
+      <p class="sub">A TV-first Remote Play client that fixes what the desktop and phone forks don’t handle in the living room.</p>
 
-    <h2>Install on Fire TV (Downloader)</h2>
-    <p>Open the <strong>Downloader</strong> app and search <code>akichi</code> (or <code>chiaki</code> / <code>remote ps5</code>) to find this page, or enter the Downloader Code: <code>(to be registered)</code>. Then install the APK.</p>
+      <div class="feature-row">
+        <div>
+          <span class="pill">The headline fix</span>
+          <h3>🎮 DualSense fix for Fire TV</h3>
+          <p>When a DualSense is paired directly to a Fire TV (Fire OS / Android 11–12), the system scrambles the button and trigger layout — L1/R1 act like L2/R2 and Options/Create don’t register. akichi detects this and <strong>corrects the mapping automatically</strong>, so your controller just works.</p>
+        </div>
+        <img class="shot" src="assets/feat_dualsense.png" alt="akichi settings showing the Fix DualSense mapping for Fire TV option">
+      </div>
 
-    <h2>What it does</h2>
-    <p>Stream your PlayStation 5 or PlayStation 4 to your TV box and play with a controller, over your local network. Fixes the scrambled DualSense button mapping that Fire OS causes, and updates itself in-app.</p>
+      <div class="feature-row rev">
+        <div>
+          <span class="pill">Living-room UX</span>
+          <h3>📺 Made for a controller</h3>
+          <p>Full D-pad navigation, a clear accent focus highlight so you always know what’s selected, and every action up in the top bar — no floating button to hunt for.</p>
+        </div>
+        <img class="shot" src="assets/screen_topbar.png" alt="akichi top bar with the Add console menu">
+      </div>
 
-    <p class="muted">akichi is independent and is <strong>not affiliated with, endorsed by, or certified by Sony Interactive Entertainment</strong>. "PlayStation", "PS4", "PS5" are trademarks of Sony Interactive Entertainment. akichi is a derivative of Chiaki / chiaki-ng, licensed under the GNU AGPL v3.0; source: <a href="https://github.com/vargasvini/akichi">github.com/vargasvini/akichi</a>.</p>
+      <div class="feature-row">
+        <div>
+          <span class="pill">Setup in seconds</span>
+          <h3>🔑 Sign in with PSN</h3>
+          <p>Link your account automatically with Sign in with PSN, or enter it manually. Register a console or add one by IP — all from one screen.</p>
+        </div>
+        <img class="shot" src="assets/screen_register.png" alt="akichi register console screen">
+      </div>
+
+      <div class="grid" style="margin-top:2.5rem">
+        <div class="feat"><div class="ic">⚡</div><h3>Low latency</h3><p>The hardware decoder runs in realtime low-latency mode — snappier input-to-screen response.</p></div>
+        <div class="feat"><div class="ic">🌈</div><h3>HDR</h3><p>Optional H265 HDR streaming for HDR-capable TVs like the Fire TV 4K.</p></div>
+        <div class="feat"><div class="ic">🔄</div><h3>In-app updates</h3><p>New versions install in place — no manual reinstall, your settings are kept.</p></div>
+        <div class="feat"><div class="ic">🆓</div><h3>Free &amp; open</h3><p>No ads, no tracking. Fully open-source under the AGPL-3.0 license.</p></div>
+      </div>
+    </section>
+
+    <section id="install" class="install">
+      <h2>Install on Fire TV</h2>
+      <p class="sub">From the <strong>Downloader</strong> app, or with adb.</p>
+      <ol>
+        <li>Open the <strong>Downloader</strong> app and search <code>akichi</code> (or <code>chiaki</code> / <code>remote ps5</code>) to reach this page — then download the APK.</li>
+        <li>Or grab <code>akichi-stable.apk</code> from the <a href="https://github.com/vargasvini/akichi/releases/latest">latest release</a> and <code>adb install</code> it.</li>
+        <li>Open akichi — your PS5/PS4 appears automatically when it’s on the <strong>same Wi-Fi network</strong>.</li>
+      </ol>
+      <p class="sub" style="margin-top:1.5rem">Requires Fire TV / Android TV (Android 11+), a PS4/PS5 with Remote Play enabled, and a controller paired to the TV box.</p>
+    </section>
   </div>
+
+  <footer><div class="wrap">
+    <p>akichi is an independent, open-source project and is <strong>not affiliated with, endorsed by, or certified by Sony Interactive Entertainment</strong>. “PlayStation”, “PS4” and “PS5” are trademarks of Sony Interactive Entertainment.</p>
+    <p>akichi is a derivative of <a href="https://git.sr.ht/~thestr4ng3r/chiaki">Chiaki</a> / <a href="https://github.com/streetpea/chiaki-ng">chiaki-ng</a>, licensed under the GNU AGPL v3.0. Source: <a href="https://github.com/vargasvini/akichi">github.com/vargasvini/akichi</a>.</p>
+  </div></footer>
 </body>
 </html>

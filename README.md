@@ -1,41 +1,108 @@
+<div align="center">
+
 # akichi
 
-**Remote Play client for PS4 & PS5 — TV-first.**
+### Remote Play for PS4 & PS5 — built for the TV.
 
-akichi lets you stream your PlayStation 4 or PlayStation 5 to your TV box
-(Fire TV / Android TV) and play it with a controller, over your local network
-or the internet.
+Stream your PlayStation to a **Fire TV** or **Android TV** box and play with a real
+controller, over your home network or the internet.
 
-> akichi is an independent open-source project and is **not affiliated with,
-> endorsed by, or certified by Sony Interactive Entertainment**. "PlayStation",
-> "PS4" and "PS5" are trademarks of Sony Interactive Entertainment.
+<a href="#install"><b>Download</b></a> ·
+<a href="#features"><b>Features</b></a> ·
+<a href="#install"><b>Install</b></a> ·
+<a href="#building"><b>Build</b></a> ·
+<a href="#credits"><b>Credits</b></a>
 
-## Why akichi
+</div>
 
-Built specifically for the living-room / TV use case, with fixes the desktop
-forks don't handle:
+![akichi home screen](docs/assets/hero_home.png)
 
-* **Controller mapping fix for Fire TV** — when a DualSense is paired to a
-  Fire TV (Fire OS / Android 11–12), the system delivers a scrambled button and
-  trigger layout. akichi detects this and corrects it automatically (see
-  `CONTROLLER_DIAGNOSIS.md`). Toggle: *Settings → Fix DualSense mapping (Fire TV)*.
-* Working touchpad, controller vibration, and on-screen control toggles.
-* TV-first UI focus (in progress).
+> akichi is an independent, open-source project and is **not affiliated with, endorsed
+> by, or certified by Sony Interactive Entertainment**. “PlayStation”, “PS4” and “PS5”
+> are trademarks of Sony Interactive Entertainment.
 
-## Status
+---
 
-Early. The controller-mapping fix and the TV install path work today. The
-roadmap (TV-native navigation, HDR/HEVC, DualSense haptics, adaptive bitrate
-via the modern libchiaki core, an input remapper with a visual "learn" mode) is
-tracked in the project.
+## Features
 
-## Credits & license
+akichi is a **TV-first** Remote Play client. It focuses on the living-room experience and
+fixes things the desktop/phone forks don’t handle on a TV box.
 
-akichi is a fork/derivative of [Chiaki](https://git.sr.ht/~thestr4ng3r/chiaki)
-by Florian Märkl and of [chiaki-ng](https://github.com/streetpea/chiaki-ng) by
-Street Pea and contributors. Huge thanks to them — without their work on the
-Remote Play protocol this would not exist.
+### 🎮 DualSense controller fix for Fire TV
+When a DualSense is paired **directly to a Fire TV** (Fire OS / Android 11–12), the system
+delivers a **scrambled button and trigger layout** — L1/R1 behave like L2/R2 and the
+Options / Create buttons don’t register. akichi **detects this and corrects the mapping
+automatically**, so your controller just works.
 
-Licensed under the **GNU Affero General Public License v3.0** with an OpenSSL
-linking exception (`LicenseRef-AGPL-3.0-only-OpenSSL`). See `LICENSE` /
-`COPYING` and `NOTICE`. The complete corresponding source is in this repository.
+![Settings — Fix DualSense mapping for Fire TV](docs/assets/feat_dualsense.png)
+
+### ⚡ Low-latency video
+The hardware decoder is configured for **realtime, low-latency** decode (no frame
+reordering/lookahead buffering) — meaningfully snappier input-to-screen response.
+
+### 🌈 HDR
+Optional **H265 HDR** streaming for HDR-capable TVs (e.g. Fire TV 4K + an HDR display).
+
+### 📺 TV-first interface
+Designed for a remote/controller: **full D-pad navigation**, a clear accent **focus
+highlight** so you always know what’s selected, and all actions in the **top bar** — no
+hunting for a floating button.
+
+![Top-bar Add menu](docs/assets/screen_topbar.png)
+
+### 🔑 Easy console setup
+**Sign in with PSN** to fill your account automatically, or enter it manually. Register a
+console or add one by IP, all from one place.
+
+![Register a console](docs/assets/screen_register.png)
+![Add a console manually](docs/assets/screen_manual.png)
+
+### 🔄 In-app updates
+New versions are detected and installed **in place** — no manual reinstall, your data is kept.
+
+---
+
+## Install
+
+> First public release coming soon.
+
+1. Grab the latest `akichi-stable.apk` from the [**Releases**](https://github.com/vargasvini/akichi/releases/latest) page.
+2. Sideload it onto your Fire TV / Android TV (via the **Downloader** app or `adb install`).
+3. Open akichi — your PS5/PS4 appears automatically when it’s on the **same Wi-Fi network**.
+
+**Requirements:** Fire TV / Android TV (Android 11+), a PS4 or PS5 with Remote Play enabled,
+and a controller paired to the TV box.
+
+---
+
+## Building
+
+CI builds the app on every push (`.github/workflows/android.yml`). To build locally you need
+the Android SDK + NDK (`25.2.9519653`) and CMake; the native library (libchiaki) is compiled
+via the bundled CMake project.
+
+```
+./gradlew assembleStableDebug
+```
+
+The release/CI signing key is injected from a secret, so local debug builds fall back to the
+default debug key.
+
+---
+
+## Credits
+
+akichi is a derivative work built on the excellent
+[**Chiaki**](https://git.sr.ht/~thestr4ng3r/chiaki) by Florian Märkl and the
+[**chiaki-ng**](https://github.com/streetpea/chiaki-ng) community, plus the chiakidroid
+Android port. All the hard Remote Play protocol work is theirs — akichi adds the TV-first
+experience and the Fire TV fixes on top.
+
+See [`NOTICE`](NOTICE) for full attribution.
+
+## License
+
+akichi is licensed under the **GNU Affero General Public License v3.0** with an OpenSSL
+linking exception (`LicenseRef-AGPL-3.0-only-OpenSSL`) — the same license as the upstream
+projects it derives from. The complete corresponding source is in this repository.
+See [`LICENSE`](LICENSE) / [`COPYING`](COPYING).
