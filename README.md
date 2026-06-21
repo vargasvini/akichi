@@ -64,11 +64,15 @@ New versions are detected and installed **in place** — no manual reinstall, yo
 
 ## Install
 
-> First public release coming soon.
+**On Fire TV (one tap):** open the **Downloader** app and enter code **`2031445`** —
+it downloads and installs automatically.
 
-1. Grab the latest `akichi-stable.apk` from the [**Releases**](https://github.com/vargasvini/akichi/releases/latest) page.
-2. Sideload it onto your Fire TV / Android TV (via the **Downloader** app or `adb install`).
-3. Open akichi — your PS5/PS4 appears automatically when it’s on the **same Wi-Fi network**.
+**Or manually:** grab `akichi-stable.apk` from the
+[**Releases**](https://github.com/vargasvini/akichi/releases/latest) page and `adb install` it.
+
+Then open akichi — your PS5/PS4 appears automatically when it’s on the **same Wi-Fi network**.
+
+> New here? Read about akichi first at **[vargasvini.github.io/akichi](https://vargasvini.github.io/akichi/)** (short link: `aftv.news/3435010`).
 
 **Requirements:** Fire TV / Android TV (Android 11+), a PS4 or PS5 with Remote Play enabled,
 and a controller paired to the TV box.

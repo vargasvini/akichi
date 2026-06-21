@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vargasvini.github.io/akichi/sitemap.xml
