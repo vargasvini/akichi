@@ -39,6 +39,8 @@ class SettingsLogsAdapter: RecyclerView.Adapter<SettingsLogsAdapter.ViewHolder>(
 		val logFile = logFiles[position]
 		holder.binding.nameTextView.text = "${dateFormat.format(logFile.date)} ${timeFormat.format(logFile.date)}"
 		holder.binding.summaryTextView.text = logFile.filename
+		// Whole row shares the log so it's one D-pad focus target on TV (share button can't be focused).
+		holder.binding.root.setOnClickListener { shareCallback?.let { it(logFile) } }
 		holder.binding.shareButton.setOnClickListener { shareCallback?.let { it(logFile) } }
 	}
 }

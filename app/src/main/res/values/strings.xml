@@ -27,6 +27,8 @@
     <string name="display_host_id_registered">ID: %s (registered)</string>
     <string name="display_host_app_title_id">App: %s\nTitle ID: %s</string>
     <string name="action_add">Add Console</string>
+    <string name="stream_on_screen_controls">On-screen controls</string>
+    <string name="stream_touchpad_only">Touchpad only</string>
     <string name="action_register">Register Console</string>
     <string name="action_add_manual">Add Console Manually</string>
     <string name="regist_pin_instructions_ps4_before">On the PS4, navigate to</string>
