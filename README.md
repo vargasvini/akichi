@@ -41,7 +41,10 @@ The hardware decoder is configured for **realtime, low-latency** decode (no fram
 reordering/lookahead buffering) — meaningfully snappier input-to-screen response.
 
 ### 🌈 HDR
-Optional **H265 HDR** streaming for HDR-capable TVs (e.g. Fire TV 4K + an HDR display).
+Optional **H265 HDR** for richer, brighter colors on HDR-capable TVs. (Streaming is up to 1080p — HDR, not 4K.)
+
+### 📶 Higher bitrate
+Push the bitrate up to **100 Mbps** — double the usual ~50 Mbps cap — for the sharpest image your network can handle.
 
 ### 📺 TV-first interface
 Designed for a remote/controller: **full D-pad navigation**, a clear accent **focus
