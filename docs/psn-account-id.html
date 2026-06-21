@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Find your PSN Account ID — akichi</title>
+  <meta name="description" content="How to find your PlayStation Network Account ID for akichi / Remote Play. The easiest way is Sign in with PSN, which fills it automatically. You can also paste your 19-digit account number or Base64 Account ID.">
+  <meta name="theme-color" content="#7C5CFF">
+  <style>
+    :root{ --bg:#15131F; --bg2:#1C1930; --card:#221D33; --line:#2C2740; --accent:#7C5CFF; --fg:#F4F2FA; --mut:#A8A4B8; --dim:#79748A; }
+    *{ box-sizing:border-box; }
+    body{ font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--fg); margin:0; line-height:1.7; }
+    .wrap{ max-width:760px; margin:0 auto; padding:0 1.25rem; }
+    a{ color:var(--accent); }
+    header{ border-bottom:1px solid var(--line); }
+    header .wrap{ display:flex; align-items:center; height:60px; }
+    .brand{ font-weight:800; font-size:1.3rem; text-decoration:none; color:var(--fg); }
+    .brand span{ color:var(--accent); }
+    h1{ font-size:2.1rem; margin:2.2rem 0 .3rem; }
+    .lead{ color:var(--mut); font-size:1.15rem; margin-top:0; }
+    h2{ margin-top:2.2rem; font-size:1.35rem; }
+    .step{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.2rem 1.4rem; margin:1rem 0; }
+    .rec{ border-color:rgba(124,92,255,.5); box-shadow:0 0 0 1px rgba(124,92,255,.25) inset; }
+    .pill{ display:inline-block; background:rgba(124,92,255,.15); color:var(--accent); border:1px solid rgba(124,92,255,.4); padding:.2rem .7rem; border-radius:999px; font-size:.8rem; font-weight:700; margin-bottom:.6rem; }
+    code{ background:var(--bg2); padding:.15rem .45rem; border-radius:6px; }
+    .note{ color:var(--dim); font-size:.92rem; border-left:3px solid var(--line); padding-left:1rem; margin:1.5rem 0; }
+    ol li{ margin:.4rem 0; }
+    footer{ border-top:1px solid var(--line); margin-top:3rem; padding:2rem 0; color:var(--dim); font-size:.85rem; }
+  </style>
+</head>
+<body>
+  <header><div class="wrap"><a class="brand" href="./">aki<span>chi</span></a></div></header>
+  <div class="wrap">
+    <h1>Find your PSN Account ID</h1>
+    <p class="lead">akichi needs your <strong>PSN Account ID</strong> to register with your console — this is <em>not</em> your username / online ID. It’s a numeric identifier tied to your PlayStation Network account.</p>
+
+    <div class="step rec">
+      <span class="pill">Easiest — recommended</span>
+      <h2 style="margin-top:.2rem">Use “Sign in with PSN”</h2>
+      <ol>
+        <li>On the <strong>Register Console</strong> screen in akichi, tap <strong>“Sign in with PSN”</strong>.</li>
+        <li>Log in with your PlayStation Network account in the page that opens.</li>
+        <li>akichi reads your Account ID and fills it in <strong>automatically</strong>. Done!</li>
+      </ol>
+      <p style="margin-bottom:0;color:var(--mut)">Your login goes straight to Sony — akichi only receives the resulting Account ID, and nothing is stored on any server.</p>
+    </div>
+
+    <h2>Manual entry</h2>
+    <p>If you already have your account identifier, you can type it in the <strong>PSN Account ID</strong> field instead — akichi accepts either form:</p>
+    <div class="step">
+      <ul>
+        <li><strong>19-digit account number</strong> — a long decimal number (e.g. <code>1234567890123456789</code>). akichi converts it for you.</li>
+        <li><strong>Base64 Account ID</strong> — the 8-byte value encoded in Base64 (ends with <code>=</code>, e.g. <code>AbCdEfGhIjk=</code>).</li>
+      </ul>
+      <p style="margin-bottom:0;color:var(--mut)">Both point to the same account — use whichever one you have.</p>
+    </div>
+
+    <div class="note">
+      <strong>Heads up:</strong> the Account ID identifies your PSN account — treat it like personal info and don’t share it publicly. It is <em>not</em> your password and can’t be used to log in, but there’s no reason to post it.
+    </div>
+
+    <p><a href="./">← Back to akichi</a></p>
+  </div>
+  <footer><div class="wrap">
+    akichi is independent and is not affiliated with, endorsed by, or certified by Sony Interactive Entertainment. “PlayStation” and “PSN” are trademarks of Sony Interactive Entertainment.
+  </div></footer>
+</body>
+</html>

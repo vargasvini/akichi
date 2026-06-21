@@ -4,6 +4,7 @@ package com.metallic.chiaki.common
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
 import androidx.annotation.StringRes
 import androidx.preference.PreferenceManager
 import com.metallic.chiaki.R
@@ -99,10 +100,18 @@ class Preferences(context: Context)
 		get() = sharedPreferences.getBoolean(swapCrossMoonKey, false)
 		set(value) { sharedPreferences.edit().putBoolean(swapCrossMoonKey, value).apply() }
 
+	// The Amazon keylayout bug only affects Fire OS, so the fix defaults ON only on Amazon
+	// (Fire TV) devices and OFF everywhere else — auto-detected, no user action needed.
+	private val isFireTvDevice = Build.MANUFACTURER.equals("Amazon", ignoreCase = true)
 	val controllerMapFixKey get() = resources.getString(R.string.preferences_controller_map_fix_key)
 	var controllerMapFix
-		get() = sharedPreferences.getBoolean(controllerMapFixKey, true)
+		get() = sharedPreferences.getBoolean(controllerMapFixKey, isFireTvDevice)
 		set(value) { sharedPreferences.edit().putBoolean(controllerMapFixKey, value).apply() }
+	init {
+		// Persist the auto-detected default once so the Settings toggle shows the same state.
+		if(!sharedPreferences.contains(controllerMapFixKey))
+			sharedPreferences.edit().putBoolean(controllerMapFixKey, isFireTvDevice).apply()
+	}
 
 	val resolutionKey get() = resources.getString(R.string.preferences_resolution_key)
 	var resolution

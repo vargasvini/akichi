@@ -43,7 +43,7 @@
     <string name="regist_option_ps4_ge_7">PS4 ≥ 7.0, &lt; 8</string>
     <string name="regist_option_ps4_ge_8">PS4 ≥ 8.0</string>
     <string name="regist_option_ps5">PS5</string>
-    <string name="regist_psn_account_id_help">Not your username! Paste your 19-digit PSN account number (we convert it) or the Base64 Account ID. How to find it:</string>
+    <string name="regist_psn_account_id_help">Not your username! Tap “Sign in with PSN” above to fill this automatically — or paste your 19-digit PSN account number (we convert it) or the Base64 Account ID. Need help?</string>
     <string name="regist_psn_account_id_help_url">https://vargasvini.github.io/akichi/psn-account-id.html</string>
     <string name="hint_regist_psn_online_id">PSN Online ID (username, case-sensitive)</string>
     <string name="hint_regist_psn_account_id">PSN Account ID — Base64 or 19-digit number</string>
@@ -101,7 +101,7 @@
     <string name="preferences_swap_cross_moon_title">Swap Cross/Moon and Box/Pyramid Buttons</string>
     <string name="preferences_swap_cross_moon_summary">Swap face buttons if default mapping is incorrect (e.g. for 8BitDo controllers)</string>
     <string name="preferences_controller_map_fix_title">Fix DualSense mapping (Fire TV)</string>
-    <string name="preferences_controller_map_fix_summary">Corrects scrambled shoulders/triggers/Create/Options for a DualSense paired to a Fire TV / Fire OS device (Amazon keylayout bug). Only affects DualSense controllers.</string>
+    <string name="preferences_controller_map_fix_summary">Fixes the scrambled DualSense shoulders/triggers/Create/Options caused by the Fire OS keylayout bug. Enabled automatically on Fire TV; has no effect on other devices, so it\'s safe to leave as-is.</string>
     <string name="preferences_rumble_enabled_title">Rumble</string>
     <string name="preferences_rumble_enabled_summary">Use phone vibration motor for rumble</string>
     <string name="preferences_motion_enabled_title">Motion</string>
