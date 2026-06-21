@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DualSense buttons wrong on Fire TV? Why it happens and how to fix it</title>
+  <meta name="description" content="If your DualSense buttons are scrambled on Fire TV — L1/R1 acting like L2/R2, Options and Create doing nothing — it's a Fire OS keylayout bug, not your controller. Here's why it happens and the app that fixes it.">
+  <meta name="keywords" content="dualsense fire tv, dualsense buttons wrong fire tv, ps5 controller fire tv not working, L1 R1 L2 R2 fire tv, fire tv remote play controller, chiaki fire tv controller, fire os controller mapping, firestick ps5 controller">
+  <meta property="og:title" content="DualSense buttons wrong on Fire TV? Here's the fix">
+  <meta property="og:description" content="A Fire OS keylayout bug scrambles the DualSense button mapping on Fire TV. This explains why, and the free app that corrects it.">
+  <meta name="theme-color" content="#7C5CFF">
+  <style>
+    :root{ --bg:#15131F; --bg2:#1C1930; --card:#221D33; --line:#2C2740; --accent:#7C5CFF; --fg:#F4F2FA; --mut:#B6B1C6; --dim:#79748A; }
+    *{ box-sizing:border-box; }
+    body{ font-family:Georgia, 'Times New Roman', serif; background:var(--bg); color:var(--fg); margin:0; line-height:1.75; }
+    .wrap{ max-width:720px; margin:0 auto; padding:0 1.3rem; }
+    a{ color:var(--accent); }
+    header{ border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+    header .wrap{ display:flex; align-items:center; height:58px; }
+    .brand{ font-weight:800; font-size:1.25rem; text-decoration:none; color:var(--fg); }
+    .brand span{ color:var(--accent); }
+    h1{ font-size:2rem; line-height:1.25; margin:2.4rem 0 .5rem; }
+    .meta{ color:var(--dim); font-size:.9rem; font-family:system-ui,sans-serif; margin-bottom:2rem; }
+    h2{ font-size:1.4rem; margin:2.4rem 0 .6rem; }
+    p{ margin:1rem 0; }
+    code{ background:var(--bg2); padding:.1rem .4rem; border-radius:5px; font-size:.92em; }
+    .box{ background:var(--card); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:0 10px 10px 0; padding:1.1rem 1.3rem; margin:1.8rem 0; font-family:system-ui,sans-serif; }
+    .cta{ font-family:system-ui,sans-serif; }
+    .btn{ display:inline-block; background:var(--accent); color:#fff!important; text-decoration:none; font-weight:700; padding:.8rem 1.5rem; border-radius:10px; margin-top:.4rem; }
+    footer{ border-top:1px solid var(--line); margin-top:3rem; padding:2rem 0; color:var(--dim); font-size:.82rem; font-family:system-ui,sans-serif; }
+  </style>
+</head>
+<body>
+  <header><div class="wrap"><a class="brand" href="./">aki<span>chi</span></a></div></header>
+  <div class="wrap">
+    <h1>Your DualSense buttons are scrambled on Fire TV. It isn't your controller.</h1>
+    <p class="meta">A short write-up on a Fire OS bug that breaks Remote Play controllers, and what actually fixes it.</p>
+
+    <p>You pair a DualSense to a Fire TV Stick, open a Remote Play app, and the buttons are all over the place. L1 and R1 behave like the triggers. The Options and Create buttons do nothing at all. Half the games are unplayable and it feels like the controller is broken.</p>
+
+    <p>It isn't. Your DualSense is fine. This is a bug in Fire OS, and once you know what's happening it makes a lot more sense.</p>
+
+    <h2>What's actually going on</h2>
+    <p>Android decides what each gamepad button means using a "key layout" file that ships with the system. For the DualSense (it shows up as vendor <code>054c</code>, product <code>0ce6</code>), the file Amazon ships on recent Fire OS builds maps the buttons to the wrong Android key codes. The shoulder buttons land where the triggers should be, the trigger axes end up on the wrong analog channels, and Create/Options get dropped.</p>
+
+    <p>Any Remote Play client that just forwards whatever Android hands it inherits that scramble. There's nothing the app can do about it unless it goes out of its way to undo the mapping. The original <a href="https://git.sr.ht/~thestr4ng3r/chiaki">Chiaki</a> was archived back in 2021 and never touched it. <a href="https://github.com/streetpea/chiaki-ng">chiaki-ng</a>, the actively-maintained fork, is built around desktop and the Steam Deck, where this particular bug doesn't exist. So on Fire TV, it just never got fixed.</p>
+
+    <h2>The fix</h2>
+    <p>akichi watches for a DualSense on a Fire OS device and rewrites the input back to what it should be before it ever reaches your PS5. L1 is L1, the triggers go back to being analog triggers, and Create/Options work again. It's turned on by default on Fire TV and it's a no-op everywhere else, so there's nothing to set up. Plug in the controller and it just works.</p>
+
+    <p>akichi is a free, open-source Remote Play client built specifically for Fire TV and Android TV. Besides the controller fix it handles the things a TV remote needs: you navigate the whole app with the D-pad, consoles show up on their own when they're on the same network, and you sign in to PSN with one button instead of hunting down an account ID.</p>
+
+    <div class="box cta">
+      <p style="margin:.2rem 0 .6rem"><strong>Get it on your Fire TV</strong></p>
+      <p style="margin:0 0 .8rem;color:var(--mut)">Open the Downloader app and enter code <code>2031445</code>. It downloads and installs on its own.</p>
+      <a class="btn" href="./">More about akichi</a>
+    </div>
+
+    <p style="font-family:system-ui,sans-serif;font-size:.95rem;color:var(--mut)">Not affiliated with Sony. If you want the technical details, the correction logic and the original diagnosis are in the <a href="https://github.com/vargasvini/akichi">source on GitHub</a>.</p>
+  </div>
+  <footer><div class="wrap">
+    akichi is independent and is not affiliated with, endorsed by, or certified by Sony Interactive Entertainment. “PlayStation”, “PS4”, “PS5” and “DualSense” are trademarks of Sony Interactive Entertainment.
+  </div></footer>
+</body>
+</html>

@@ -8,4 +8,8 @@
     <loc>https://vargasvini.github.io/akichi/psn-account-id.html</loc>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>https://vargasvini.github.io/akichi/fix-dualsense-fire-tv.html</loc>
+    <priority>0.8</priority>
+  </url>
 </urlset>

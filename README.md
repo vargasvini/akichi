@@ -34,7 +34,7 @@ delivers a **scrambled button and trigger layout** — L1/R1 behave like L2/R2 a
 Options / Create buttons don’t register. akichi **detects this and corrects the mapping
 automatically**, so your controller just works.
 
-![Settings — Fix DualSense mapping for Fire TV](docs/assets/feat_dualsense.png)
+![Settings — the DualSense fix is on by default on Fire TV](docs/assets/demo-settings.gif)
 
 ### ⚡ Low-latency video
 The hardware decoder is configured for **realtime, low-latency** decode (no frame
