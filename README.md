@@ -50,9 +50,10 @@ hunting for a floating button.
 
 ![Top-bar Add menu](docs/assets/screen_topbar.png)
 
-### 🔑 Easy console setup
-**Sign in with PSN** to fill your account automatically, or enter it manually. Register a
-console or add one by IP, all from one place.
+### 🔑 One-tap PSN sign-in (no scripts)
+Other Remote Play clients make you dig up your PSN account ID with command-line scripts.
+akichi just **signs you in and fills it automatically** — then registers your console.
+(Manual entry is still available.)
 
 ![Register a console](docs/assets/screen_register.png)
 ![Add a console manually](docs/assets/screen_manual.png)
