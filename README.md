@@ -94,6 +94,13 @@ default debug key.
 
 ---
 
+## Support akichi
+
+akichi is free and open-source. If it helps you, a tip keeps it updated and improving 💜
+
+* **Ko-fi:** [ko-fi.com/getakichi](https://ko-fi.com/getakichi)
+* **GitHub Sponsors:** [github.com/sponsors/vargasvini](https://github.com/sponsors/vargasvini)
+
 ## Credits
 
 akichi is a derivative work built on the excellent
