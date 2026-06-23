@@ -67,7 +67,6 @@ akichi is free and has no ads. If it's useful to you and you want to chip in, it
 keep it maintained:
 
 - Ko-fi: https://ko-fi.com/getakichi
-- GitHub Sponsors: https://github.com/sponsors/vargasvini
 
 ## Credits
 
